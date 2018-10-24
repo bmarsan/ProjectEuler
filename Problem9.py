@@ -7,6 +7,7 @@ For example, 32 + 42 = 9 + 16 = 25 = 52.
 There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 """
+import sys
 
 
 def is_pythagorean_tuple(a_value, b_value, c_value):
@@ -34,5 +35,6 @@ for a_val in range(1, 499):
         if is_pythagorean_tuple(a_val, b_val, c_val):
             print('a: {0}, b: {1}, c: {2}'.format(a_val, b_val, c_val))
             print(a_val*b_val*c_val)
+            sys.exit()
         b_val += 1
     b_val = a_val + 2
