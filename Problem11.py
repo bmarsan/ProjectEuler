@@ -28,8 +28,9 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 in the 20×20 grid?
 """
 
-import re
+import time
 
+start = time.time()
 
 def string_to_list(string_nums):
     """
@@ -208,6 +209,39 @@ def find_diagonal_rtol_max(data_set, count):
     print("Max diagonal row: {0}".format(max_row))
     print("Max diagonal values: {0}".format(max_vals))
 
+
+def find_max_product(data):
+
+    temp_prod = 0
+    max_prod = 0
+
+    for i in range(20):
+        for j in range(16):
+            # left/right
+            temp_prod = data[i][j] * data[i][j+1] * data[i][j+2] * data[i][j+3]
+            if temp_prod > max_prod:
+                max_prod = temp_prod
+            # up/down
+            temp_prod = data[j][i] * data[j+1][i] * data[j+2][i] * data[j+3][i]
+            if temp_prod > max_prod:
+                max_prod = temp_prod
+
+    # diag - backslash
+    for i in range(16):
+        for j in range(16):
+            temp_prod = data[i][j] * data[i+1][j+1] * data[i+2][j+2] * data[i+3][j+3]
+            if temp_prod > max_prod:
+                max_prod = temp_prod
+    # diag - forward slash
+    for i in range(3,20):
+        for j in range(16):
+            temp_prod = data[i][j] * data[i-1][j+1] * data[i-2][j+2] * data[i-3][j+3]
+            if temp_prod > max_prod:
+                max_prod = temp_prod
+
+    print(max_prod)
+
+
 data_set_string = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
@@ -232,8 +266,12 @@ data_set_string = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 adjacent_count = 4
 
 data_set = string_to_list(data_set_string)
-find_right_left_max(data_set, adjacent_count)
-find_up_down_max(data_set,adjacent_count)
-find_diagonal_ltor_max(data_set, adjacent_count)
-find_diagonal_rtol_max(data_set, adjacent_count)
+# find_right_left_max(data_set, adjacent_count)
+# find_up_down_max(data_set,adjacent_count)
+# find_diagonal_ltor_max(data_set, adjacent_count)
+# find_diagonal_rtol_max(data_set, adjacent_count)
+#find_max_product(data_set)
 
+
+elapsed = time.time() - start
+print(elapsed)
